@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NSD 225 Nutrition Study Guide</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-100">
+  <div id="root"></div>
+
+  <!-- React, ReactDOM, Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- Your Full React Code -->
+  <script type="text/babel">
+    const { useState } = React;
+    const { Search, Check, ChevronDown, ChevronRight, Calculator, Plus, BookOpen, HelpCircle } = lucide;
+
+    const EnhancedNutritionStudyGuide = () => {
+      const studyTopics = {
+    "Scientific Method": {
+      "questions": [
+        "What are the steps of the scientific method?",
+        "What is the purpose of the scientific method?",
+        "Who reviews work before it's published?"
+      ],
+      "answers": [
+        "The scientific method follows these systematic steps: (1) Observe patterns and phenomena, (2) Review prior knowledge and literature, then make hypotheses based on observations, (3) Conduct controlled experiments designed to test the hypothesis, (4) Analyze data and observations collected from experiments, (5) Draw conclusions based on the data analysis, and (6) Share findings with the scientific community to get peer feedback and allow for replication of studies.",
+        "The purpose of the scientific method is to provide a standardized, objective approach to understanding the natural world and testing theories. In nutrition science specifically, it allows researchers to systematically study how nutrients affect human health, establish cause-and-effect relationships, and develop evidence-based dietary recommendations. This methodology helps eliminate bias, ensures reproducibility, and builds reliable knowledge about nutrition and health.",
+        "Peer reviewers - typically other scientists and experts in the same field - review research work before it's published. This peer review process involves independent evaluation of the study's methodology, data analysis, conclusions, and scientific merit. Only after passing this rigorous review process can research be published in reputable scientific journals, ensuring quality and reliability of published nutrition research."
+      ],
+      "notes": "SCIENTIFIC METHOD STEPS:\\n1. Observe patterns\\n2. Review prior knowledge and make hypotheses\\n3. Conduct controlled experiments around hypothesis\\n4. Analyze data and observations\\n5. Draw a conclusion\\n6. Share findings (to get feedback and repeat)\\n\\nNUTRITION SCIENCE: The scientific study of nutrients/the roles of nutrients in the body/how nutrients impact health and disease.\\n\\nRESEARCH METHODS:\\n- EPIDEMIOLOGY: Study of how disease rates vary among different population groups\\n- ANIMAL MODEL: Use of animals to study disease to understand more about human disease\\n- CASE-CONTROL STUDY: Study comparing individuals who have a disease with those who don't\\n- DOUBLE-BLIND STUDY: Experiment where neither participants nor researchers know participant assignments until completion"
+    },
+    "Nutrients": {
+      "questions": [
+        "What are the three macronutrients? How many calories per gram do they each have?",
+        "What makes a nutrient essential? What are the essential nutrients?",
+        "How do you determine a food's energy density?"
+      ],
+      "answers": [
+        "The three macronutrients are: (1) CARBOHYDRATES - provide 4 kilocalories per gram, (2) PROTEINS - provide 4 kilocalories per gram, and (3) FATS (LIPIDS) - provide 9 kilocalories per gram. Note that alcohol, while not a nutrient, provides 7 kilocalories per gram. These macronutrients are called 'macro' because the body needs them in large amounts (grams) compared to micronutrients (vitamins and minerals needed in milligrams or micrograms).",
+        "A nutrient is considered essential if it meets ALL THREE criteria: (1) A specific biological function in the body has been identified for that nutrient, (2) That specific function becomes impaired when the nutrient is removed from the diet, and (3) The same function is restored when the nutrient is added back to the diet. The essential nutrients include: 9 essential amino acids (from proteins), 2 essential fatty acids (omega-3 ALA and omega-6 LA), all 13 vitamins (A, D, E, K, C, and 8 B vitamins), approximately 15 essential minerals (including calcium, iron, zinc, etc.), and water.",
+        "Energy density is calculated using the formula: Energy Density = Total Calories ÷ Weight of Food (in grams). To find total calories, multiply grams of each macronutrient by their caloric values: carbohydrates × 4 kcal/g + proteins × 4 kcal/g + fats × 9 kcal/g = total calories. Then divide by the food's weight in grams. Foods with higher energy density provide more calories per gram (like nuts, oils), while foods with lower energy density provide fewer calories per gram (like fruits, vegetables with high water content)."
+      ],
+      "notes": "THE THREE MACRONUTRIENTS AND CALORIES PER GRAM:\\n1. CARBOHYDRATES: 4 kcal per gram\\n2. PROTEINS: 4 kcal per gram\\n3. FATS (LIPIDS): 9 kcal per gram\\n(Note: Alcohol = 7 kcal per gram, but not a nutrient)\\n\\nWHAT MAKES A NUTRIENT ESSENTIAL:\\nMUST MEET ALL 3 CRITERIA:\\n1. A specific function in the body has been identified for the nutrient\\n2. That function is impaired if the nutrient is removed from the diet\\n3. The same function is restored if the nutrient is added back to the diet\\n\\nESSENTIAL NUTRIENTS:\\n- 9 Essential amino acids (from proteins)\\n- 2 Essential fatty acids: omega-3 (ALA) and omega-6 (LA)\\n- All vitamins (13 vitamins)\\n- All minerals (15+ minerals)\\n- Water"
+    }
+};
+
+
+      const [expandedSections, setExpandedSections] = useState({});
+      const [completedTopics, setCompletedTopics] = useState(new Set());
+      const [searchTerm, setSearchTerm] = useState('');
+      const [showAnswers, setShowAnswers] = useState({});
+
+      const toggleSection = (topic) => {
+        setExpandedSections(prev => ({ ...prev, [topic]: !prev[topic] }));
+      };
+
+      const toggleCompleted = (topic) => {
+        setCompletedTopics(prev => {
+          const newSet = new Set(prev);
+          if (newSet.has(topic)) newSet.delete(topic);
+          else newSet.add(topic);
+          return newSet;
+        });
+      };
+
+      const toggleAnswers = (topic) => {
+        setShowAnswers(prev => ({ ...prev, [topic]: !prev[topic] }));
+      };
+
+      const filteredTopics = Object.entries(studyTopics).filter(([topic, data]) => {
+        if (!searchTerm) return true;
+        const searchLower = searchTerm.toLowerCase();
+        return (
+          topic.toLowerCase().includes(searchLower) ||
+          data.questions.some(q => q.toLowerCase().includes(searchLower)) ||
+          data.notes.toLowerCase().includes(searchLower) ||
+          (data.answers && data.answers.some(a => a.toLowerCase().includes(searchLower)))
+        );
+      });
+
+      return (
+        <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg mt-6 rounded-lg">
+          <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+            NSD 225 Nutrition Study Guide
+          </h1>
+          <div className="relative mb-6">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search topics, questions, answers, or notes..."
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          <div className="space-y-4">
+            {filteredTopics.map(([topic, data]) => (
+              <div key={topic} className="border border-gray-200 rounded-lg">
+                <div className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50" onClick={() => toggleSection(topic)}>
+                  <h3 className="font-semibold text-gray-800">{topic}</h3>
+                </div>
+                {expandedSections[topic] && (
+                  <div className="border-t border-gray-200 p-4 space-y-4">
+                    <div>
+                      <h4 className="font-medium text-gray-700 mb-2">Study Questions</h4>
+                      {data.questions.map((q, idx) => (
+                        <div key={idx} className="bg-gray-50 rounded-lg p-3 mb-2">
+                          <p className="font-medium text-gray-800">{q}</p>
+                          {showAnswers[topic] && data.answers[idx] && (
+                            <div className="mt-2 p-2 bg-blue-50 border-l-4 border-blue-400 rounded">
+                              <p className="text-sm text-gray-700">{data.answers[idx]}</p>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                      <button onClick={() => toggleAnswers(topic)} className="text-blue-600 hover:underline text-sm mt-2">
+                        {showAnswers[topic] ? 'Hide Answers' : 'Show Answers'}
+                      </button>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-gray-700 mb-1">Notes:</h4>
+                      <div className="bg-blue-50 rounded-lg p-3 text-sm whitespace-pre-wrap">
+                        {data.notes}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<EnhancedNutritionStudyGuide />);
+  </script>
+</body>
+</html>
