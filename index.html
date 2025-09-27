@@ -1,445 +1,414 @@
-import React, { useState } from 'react';
-import { Search, Check, ChevronDown, ChevronRight, Calculator, Plus, BookOpen, HelpCircle } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NSD 225 Nutrition Study Guide</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-100">
+  <div id="root"></div>
 
-const EnhancedNutritionStudyGuide = () => {
-  const studyTopics = {
-    "Scientific Method": {
-      questions: [
-        "What are the steps of the scientific method?",
-        "What is the purpose of the scientific method?",
-        "Who reviews work before it's published?"
-      ],
-      answers: [
-        "The scientific method follows these systematic steps: (1) Observe patterns and phenomena, (2) Review prior knowledge and literature, then make hypotheses based on observations, (3) Conduct controlled experiments designed to test the hypothesis, (4) Analyze data and observations collected from experiments, (5) Draw conclusions based on the data analysis, and (6) Share findings with the scientific community to get peer feedback and allow for replication of studies.",
-        "The purpose of the scientific method is to provide a standardized, objective approach to understanding the natural world and testing theories. In nutrition science specifically, it allows researchers to systematically study how nutrients affect human health, establish cause-and-effect relationships, and develop evidence-based dietary recommendations. This methodology helps eliminate bias, ensures reproducibility, and builds reliable knowledge about nutrition and health.",
-        "Peer reviewers - typically other scientists and experts in the same field - review research work before it's published. This peer review process involves independent evaluation of the study's methodology, data analysis, conclusions, and scientific merit. Only after passing this rigorous review process can research be published in reputable scientific journals, ensuring quality and reliability of published nutrition research."
-      ],
-      notes: "SCIENTIFIC METHOD STEPS:\n1. Observe patterns\n2. Review prior knowledge and make hypotheses\n3. Conduct controlled experiments around hypothesis\n4. Analyze data and observations\n5. Draw a conclusion\n6. Share findings (to get feedback and repeat)\n\nNUTRITION SCIENCE: The scientific study of nutrients/the roles of nutrients in the body/how nutrients impact health and disease.\n\nRESEARCH METHODS:\n- EPIDEMIOLOGY: Study of how disease rates vary among different population groups\n- ANIMAL MODEL: Use of animals to study disease to understand more about human disease\n- CASE-CONTROL STUDY: Study comparing individuals who have a disease with those who don't\n- DOUBLE-BLIND STUDY: Experiment where neither participants nor researchers know participant assignments until completion"
-    },
-    "Nutrients": {
-      questions: [
-        "What are the three macronutrients? How many calories per gram do they each have?",
-        "What makes a nutrient essential? What are the essential nutrients?",
-        "How do you determine a food's energy density?"
-      ],
-      answers: [
-        "The three macronutrients are: (1) CARBOHYDRATES - provide 4 kilocalories per gram, (2) PROTEINS - provide 4 kilocalories per gram, and (3) FATS (LIPIDS) - provide 9 kilocalories per gram. Note that alcohol, while not a nutrient, provides 7 kilocalories per gram. These macronutrients are called 'macro' because the body needs them in large amounts (grams) compared to micronutrients (vitamins and minerals needed in milligrams or micrograms).",
-        "A nutrient is considered essential if it meets ALL THREE criteria: (1) A specific biological function in the body has been identified for that nutrient, (2) That specific function becomes impaired when the nutrient is removed from the diet, and (3) The same function is restored when the nutrient is added back to the diet. The essential nutrients include: 9 essential amino acids (from proteins), 2 essential fatty acids (omega-3 ALA and omega-6 LA), all 13 vitamins (A, D, E, K, C, and 8 B vitamins), approximately 15 essential minerals (including calcium, iron, zinc, etc.), and water.",
-        "Energy density is calculated using the formula: Energy Density = Total Calories ÷ Weight of Food (in grams). To find total calories, multiply grams of each macronutrient by their caloric values: carbohydrates × 4 kcal/g + proteins × 4 kcal/g + fats × 9 kcal/g = total calories. Then divide by the food's weight in grams. Foods with higher energy density provide more calories per gram (like nuts, oils), while foods with lower energy density provide fewer calories per gram (like fruits, vegetables with high water content)."
-      ],
-      notes: "THE THREE MACRONUTRIENTS AND CALORIES PER GRAM:\n1. CARBOHYDRATES: 4 kcal per gram\n2. PROTEINS: 4 kcal per gram\n3. FATS (LIPIDS): 9 kcal per gram\n(Note: Alcohol = 7 kcal per gram, but not a nutrient)\n\nWHAT MAKES A NUTRIENT ESSENTIAL:\nMUST MEET ALL 3 CRITERIA:\n1. A specific function in the body has been identified for the nutrient\n2. That function is impaired if the nutrient is removed from the diet\n3. The same function is restored if the nutrient is added back to the diet\n\nESSENTIAL NUTRIENTS:\n- 9 Essential amino acids (from proteins)\n- 2 Essential fatty acids: omega-3 (ALA) and omega-6 (LA)\n- All vitamins (13 vitamins)\n- All minerals (15+ minerals)\n- Water"
-    },
-    "Carbohydrates": {
-      questions: [
-        "What is a complex carbohydrate? What is the structure of it?",
-        "What is high-fructose corn syrup? Why is it considered 'bad' for you?",
-        "What is fiber? What happens to it in the gastrointestinal tract?"
-      ],
-      answers: [
-        "A complex carbohydrate is a large molecule made up of many glucose units linked together in long chains. STRUCTURE: Complex carbohydrates include starch and fiber. STARCH has glucose units connected by ALPHA bonds that digestive enzymes can break (amylose is unbranched, amylopectin is branched). FIBER has glucose units connected by BETA bonds that human enzymes cannot break. Complex carbs provide sustained energy because they take time to digest and break down into individual glucose molecules, unlike simple sugars that are rapidly absorbed.",
-        "High-fructose corn syrup (HFCS) is a liquid sweetener containing about 55% fructose and 45% glucose (similar to sucrose which is 50/50). WHY IT'S CONSIDERED PROBLEMATIC: (1) Very cheap to produce, leading to overuse in processed foods, (2) Americans consume about 60 pounds per year, (3) Fructose metabolism differs from glucose - it bypasses normal blood sugar regulation, (4) Research suggests it may promote fat storage more than regular sugar, (5) Linked to increased visceral (belly) fat accumulation. However, current research shows HFCS is metabolically similar to regular sugar - the main issue is overconsumption of any added sugars.",
-        "Fiber is the indigestible part of plant foods, consisting of carbohydrates with BETA bonds that human enzymes cannot break. IN THE GI TRACT: Fiber passes through the stomach and small intestine largely intact since we lack enzymes to digest it. In the large intestine (colon), beneficial bacteria ferment some types of fiber, producing beneficial compounds like short-chain fatty acids. Fiber adds bulk to stool, helps maintain bowel regularity, slows nutrient absorption (which helps control blood sugar and cholesterol), and provides food for healthy gut bacteria."
-      ],
-      notes: "COMPLEX CARBOHYDRATES:\nSTARCH: Glucose linked with ALPHA BONDS (digestible)\n- AMYLOSE (20-25%): Unbranched\n- AMYLOPECTIN (75-80%): Branched, most abundant\n\nFIBER: Glucose linked with BETA BONDS (NOT digestible)\n- INSOLUBLE: Doesn't dissolve, adds bulk, prevents constipation\n- SOLUBLE: Dissolves in water, bacteria ferment it, lowers cholesterol, improves glucose control\n\nHIGH-FRUCTOSE CORN SYRUP: 55% fructose, 45% glucose. Americans consume 60lbs/year. Provides extra calories without beneficial nutrients."
-    },
-    "Lipids": {
-      questions: [
-        "What is the difference between a fat and an oil?",
-        "What is an Omega-3 fatty acid? What is an omega-6 fatty acid?",
-        "What are EPA and DHA? How are they different from ALA?"
-      ],
-      answers: [
-        "The difference between fats and oils is their physical state at room temperature, which reflects their chemical composition: FATS are solid at room temperature and contain more SATURATED fatty acids (no double bonds between carbons, allowing molecules to pack tightly together). Examples include butter, lard, coconut oil. OILS are liquid at room temperature and contain more UNSATURATED fatty acids (one or more double bonds creating 'kinks' that prevent tight packing). Examples include olive oil, canola oil, sunflower oil.",
-        "OMEGA-3 FATTY ACIDS are essential polyunsaturated fats with the first double bond located at the third carbon from the omega (methyl) end of the fatty acid chain. They are anti-inflammatory and support heart and brain health. OMEGA-6 FATTY ACIDS are essential polyunsaturated fats with the first double bond at the sixth carbon from the omega end. While essential, they tend to be pro-inflammatory when consumed in excess relative to omega-3s. The modern Western diet contains too much omega-6 (from vegetable oils) relative to omega-3s, creating an inflammatory imbalance.",
-        "EPA (Eicosapentaenoic Acid) and DHA (Docosahexaenoic Acid) are long-chain omega-3 fatty acids found primarily in fatty fish, algae, and seafood. ALA (Alpha-Linolenic Acid) is a shorter-chain omega-3 found in plant sources like flaxseeds, walnuts, and chia seeds. DIFFERENCES: EPA has strong anti-inflammatory effects and supports cardiovascular health; DHA is crucial for brain function, eye health, and nervous system development; ALA can be converted to EPA and DHA but very inefficiently (only 1-10% conversion rate). Therefore, direct consumption of EPA/DHA from fish or algae is more effective than relying on ALA conversion."
-      ],
-      notes: "FAT vs OIL:\n- FAT: Solid at room temperature, higher saturated fatty acids (butter, bacon)\n- OIL: Liquid at room temperature, higher unsaturated fats (seeds, nuts, olives)\n\nESSENTIAL FATTY ACIDS:\nOMEGA-3 (ALA): First double bond at 3rd carbon. Anti-inflammatory. Sources: flaxseeds, walnuts, fish\n- EPA/DHA: From fish, can lower heart disease risk\nOMEGA-6 (LA): First double bond at 6th carbon. Pro-inflammatory. Sources: plant oils, nuts"
-    },
-    "Vitamins and Minerals": {
-      questions: [
-        "What is a vitamin? What are the characteristics of it?",
-        "What is the importance of minerals such as calcium and iron?",
-        "What are the differences between fat-soluble and water-soluble vitamins?"
-      ],
-      answers: [
-        "A vitamin is an organic compound that the body needs in very small amounts (milligrams or micrograms) to help regulate and support chemical reactions and maintain normal physiological functions. Key characteristics: (1) All vitamins are essential nutrients - the body cannot make them in sufficient quantities, (2) They are needed in tiny amounts but have crucial roles, (3) They act as antioxidants, coenzymes, and hormone precursors, (4) Deficiency causes specific diseases, (5) They can be destroyed by heat, light, air, or alkaline conditions, (6) They are organic molecules containing carbon.",
-        "CALCIUM importance: Forms the structural framework of bones and teeth (99% of body calcium), essential for muscle contraction including heart muscle, required for nerve signal transmission, needed for blood clotting, helps regulate blood pressure. Deficiency leads to osteoporosis, fractures, and poor bone development in children. IRON importance: Essential component of hemoglobin (carries oxygen in blood) and myoglobin (stores oxygen in muscles), part of enzymes involved in energy metabolism, supports immune function. Iron deficiency causes anemia (fatigue, weakness, pale skin, shortness of breath), and is the most common nutrient deficiency worldwide.",
-        "FAT-SOLUBLE VITAMINS (A, D, E, K): Dissolved and transported in fats, stored in liver and fatty tissues, can accumulate to toxic levels if consumed excessively, absorbed along with dietary fats in small intestine, don't need daily consumption due to storage, require bile for absorption. WATER-SOLUBLE VITAMINS (C and 8 B vitamins): Dissolve in water, not stored significantly in body, excess amounts excreted in urine, need regular consumption (except B12 which can be stored), easily lost in cooking water, generally not toxic in excess."
-      ],
-      notes: "FAT-SOLUBLE VITAMINS (A, D, E, K): Stored in liver and fatty tissues, potential toxicity if excess\nWATER-SOLUBLE VITAMINS: B's and C, dissolved in water, excreted in urine\n\nIMPORTANT FUNCTIONS:\n- CALCIUM: Bone structure, muscle contraction\n- IRON: Component of hemoglobin, prevents anemia\n- SODIUM/POTASSIUM: Water balance, nerve signals\n- IODINE: Thyroid hormone component"
-    },
-    "Healthy Eating": {
-      questions: [
-        "What is considered 'healthy eating?'",
-        "Why should foods high in sodium and saturated fat be limited in the diet?",
-        "What types of foods are higher in sodium and saturated fat?",
-        "What are psychological factors that encourage a person to eat?"
-      ],
-      answers: [
-        "Healthy eating involves consuming a balanced diet that provides adequate nutrition while supporting overall health and disease prevention. It includes: eating a variety of foods from all food groups (fruits, vegetables, whole grains, lean proteins, healthy fats), choosing nutrient-dense foods over calorie-dense but nutrient-poor foods, limiting added sugars, saturated fats, and sodium, maintaining appropriate portion sizes, staying hydrated, and considering individual needs based on age, activity level, and health conditions.",
-        "Foods high in sodium and saturated fat should be limited because: SODIUM excess increases blood pressure (hypertension), which raises the risk of stroke, heart disease, and kidney disease. The body only needs about 500mg sodium daily, but Americans consume 2300-3400mg on average. SATURATED FAT raises LDL ('bad') cholesterol levels in the blood, contributing to atherosclerosis (plaque buildup in arteries), which increases risk of heart disease and stroke.",
-        "Foods highest in SODIUM include: processed meats (bacon, deli meats, sausages), canned soups and broths, frozen meals, restaurant foods, chips and salty snacks, cheese, bread and baked goods, condiments and sauces. Foods highest in SATURATED FAT include: fatty cuts of meat (ribeye, ground beef), full-fat dairy products (butter, whole milk, cheese, ice cream), coconut and palm oils, fried foods, baked goods made with solid fats, and processed snack foods.",
-        "Psychological factors that encourage eating include: SENSORY factors (appealing taste, smell, texture, color, temperature), SOCIAL factors (eating with others, cultural traditions, learned behaviors from family), EMOTIONAL factors (stress eating, comfort foods, eating when bored or sad), ENVIRONMENTAL cues (food advertising, seeing food, accessibility), LEARNED ASSOCIATIONS (linking certain foods with celebrations or rewards), and APPETITE (external cues that stimulate eating even without hunger)."
-      ],
-      notes: "PSYCHOLOGICAL FACTORS:\n\nHUNGER vs APPETITE vs SATIETY:\n- HUNGER: Primary physiological (internal) drive to find and eat food\n- APPETITE: Primary physiological (external) influences that encourage eating, often without obvious hunger\n- SATIETY: State where no longer desire to eat, feeling of satisfaction\n\nSENSORY FACTORS: Flavor (taste and smell), umami (meaty/savory), texture, color, moisture, temperature\n\nSOCIAL FACTORS:\n- Eating is social event\n- Learn by watching parents/peers\n- FOOD COST: Major determinant of choices\n- Income affects fruit/vegetable purchases"
-    },
-    "Protein": {
-      questions: [
-        "What is the difference between a complete and incomplete protein?"
-      ],
-      answers: [
-        "COMPLETE PROTEINS contain all 9 essential amino acids in adequate proportions that the human body needs but cannot produce on its own. These proteins can support protein synthesis and growth without needing to be combined with other protein sources. Examples include: animal proteins (meat, poultry, fish, eggs, dairy), quinoa, soy products (tofu, tempeh), buckwheat, hemp seeds, and chia seeds. INCOMPLETE PROTEINS are missing one or more of the essential amino acids or contain them in insufficient amounts. Examples include most plant proteins: beans and legumes (low in methionine), grains (low in lysine), nuts and seeds (variable deficiencies). However, incomplete proteins can be combined throughout the day to create a complete amino acid profile - this is called protein complementation."
-      ],
-      notes: "COMPLETE PROTEINS: Contain all 9 essential amino acids in adequate amounts. Examples: meat, eggs, dairy, soy, quinoa.\n\nINCOMPLETE PROTEINS: Missing or low in some essential amino acids. Most plant proteins (beans, nuts, grains). Can combine different incomplete proteins to get all 9 essential amino acids.\n\nCOMPLEMENTARY FOODS: Eating different incomplete proteins together to make up for all 9 essential amino acids."
-    },
-    "Genetic Code for Building Protein": {
-      questions: [
-        "Why are essential amino acids important?",
-        "What is protein synthesis?",
-        "What is the importance of protein's shape?",
-        "How can genetic disorders impact protein?"
-      ],
-      answers: [
-        "Essential amino acids are important because: (1) The body cannot produce them in sufficient quantities, so they must be obtained from food, (2) All 9 essential amino acids must be present simultaneously for protein synthesis to occur - if even one is missing, protein synthesis stops, (3) They serve as building blocks for creating all body proteins including enzymes, hormones, antibodies, structural proteins, and transport proteins, (4) They support growth, tissue repair, immune function, and metabolism.",
-        "Protein synthesis is the process by which cells create proteins from amino acids according to instructions in DNA. PROCESS: (1) TRANSCRIPTION - DNA instructions are copied to messenger RNA (mRNA) in the nucleus, (2) TRANSLATION - mRNA moves to ribosomes where it's 'read' in groups of three nucleotides (codons), (3) Each codon codes for a specific amino acid, (4) Transfer RNA (tRNA) brings the correct amino acids to the ribosome, (5) Amino acids are linked together in the correct sequence to form a polypeptide chain, (6) The chain folds into its functional 3D shape.",
-        "Protein shape is crucial because structure determines function - a protein's 3D shape determines what it can do in the body. IMPORTANCE: (1) ENZYME ACTIVITY - enzymes must have the correct shape for their active site to bind substrates, (2) HORMONE FUNCTION - hormones like insulin must have proper shape to bind to receptors, (3) ANTIBODY RECOGNITION - antibodies recognize specific shapes on pathogens, (4) TRANSPORT - hemoglobin's shape allows it to carry oxygen, (5) STRUCTURE - collagen's triple helix provides strength to connective tissue.",
-        "Genetic disorders can impact proteins in several ways: (1) GENETIC MUTATIONS can change the amino acid sequence, altering protein shape and function (example: sickle cell anemia creates abnormal hemoglobin), (2) MISSING ENZYMES - genetic defects can prevent production of specific enzymes (example: Phenylketonuria/PKU - cannot make enzyme to metabolize phenylalanine, leading to toxic buildup and mental retardation if untreated), (3) ALTERED PROTEIN STRUCTURE - mutations can create unstable or non-functional proteins."
-      ],
-      notes: "PROTEIN STRUCTURE: Made of carbon, hydrogen, oxygen, NITROGEN. All composed of same 20 amino acids. Shape determines function.\n\nESSENTIAL AMINO ACIDS: 9 of 20 are essential (must get from food). Body can't make proteins without all 9.\n\nPROTEIN FUNCTIONS:\n- STRUCTURE: Collagen for bones/tissues\n- ANTIBODIES: Fight infection\n- ENZYMES: Speed up reactions\n- TRANSPORT: Hemoglobin carries oxygen\n- HORMONES: Insulin, growth hormone\n- ENERGY: 4 calories per gram\n\nPHENYLKETONURIA (PKU): Genetic defect, can't metabolize phenylalanine. Causes mental retardation if untreated."
-    },
-    "Hormones and Enzymes": {
-      questions: [
-        "What is an enzyme? How does it work?",
-        "What is a hormone? How does it work?",
-        "What impact do hormones and enzymes have on the body?",
-        "What hormones does the pancreas secrete? What causes the pancreas to secrete them individually?"
-      ],
-      answers: [
-        "An enzyme is a protein that acts as a biological catalyst, speeding up chemical reactions in the body without being consumed in the process. HOW IT WORKS: (1) The substrate (molecule to be changed) binds to the enzyme's active site - a specifically shaped region that fits the substrate like a lock and key, (2) The enzyme stabilizes the substrate and lowers the activation energy needed for the reaction, (3) The substrate is converted to product(s), (4) The product(s) are released, and the enzyme is free to catalyze another reaction.",
-        "A hormone is a chemical messenger produced by glands and released into the bloodstream to coordinate and regulate various body functions. HOW IT WORKS: (1) A gland releases a hormone into the bloodstream in response to a specific stimulus, (2) The hormone travels through the blood to target organs or tissues, (3) The hormone binds to specific receptor proteins on or in target cells, (4) This binding triggers specific cellular responses or changes in gene expression, (5) The response helps maintain homeostasis or coordinates body functions.",
-        "ENZYME IMPACTS: Essential for virtually all body functions - digestion (breaking down food), metabolism (converting nutrients to energy), DNA repair, protein synthesis, detoxification, and thousands of other reactions. Without enzymes, body chemistry would be too slow to sustain life. HORMONE IMPACTS: Coordinate major body functions including growth and development, metabolism and energy balance, reproduction, stress response, sleep cycles, mood regulation, blood sugar control, and homeostasis.",
-        "The pancreas secretes two main hormones with opposite effects: INSULIN - released when blood glucose is HIGH (after eating). Insulin promotes glucose uptake by cells, glucose storage as glycogen, fat storage, and protein synthesis. It lowers blood glucose levels. GLUCAGON - released when blood glucose is LOW (between meals, during fasting). Glucagon promotes breakdown of stored glycogen to release glucose, stimulates gluconeogenesis (making glucose from other sources), and promotes fat breakdown for energy. It raises blood glucose levels."
-      ],
-      notes: "HORMONES: Chemical signals that coordinate reactions. Travel through body to find receptor proteins on target cells.\n\nPANCREAS HORMONES:\n- INSULIN: Released when blood glucose HIGH. Promotes glucose storage, fat storage, protein production\n- GLUCAGON: Released when blood glucose LOW. Promotes use of stored glucose, fat use, gluconeogenesis\n\nENZYMES: Speed up chemical reactions, not altered by reaction. Almost all are proteins. Stay where made.\n\nDIGESTIVE ENZYMES:\n- AMYLASE: Breaks down starch (mouth, pancreas)\n- PEPSIN: Breaks down proteins (stomach)\n- LIPASE: Breaks down fats (stomach, pancreas)\n- MALTASE, SUCRASE, LACTASE: Break disaccharides (small intestine)"
-    },
-    "Digestive System": {
-      questions: [
-        "What role does the small intestine play? Know the details.",
-        "What are lipoproteins? What are they responsible for?",
-        "What are chylomicrons? What are they responsible for?",
-        "How are lipids digested and absorbed? Proteins? Carbohydrates?"
-      ],
-      answers: [
-        "The small intestine is the primary site of nutrient digestion and absorption, responsible for over 90% of nutrient and water absorption. STRUCTURE: About 22 feet long with massive surface area (2,700 square feet) created by three levels of folding: (1) Plicae circulares (large circular folds), (2) Villi (finger-like projections), (3) Microvilli (microscopic projections forming the 'brush border'). SECTIONS: Duodenum (receives pancreatic enzymes and bile), Jejunum (primary absorption site), Ileum (absorbs B12, bile salts). Each villus contains capillaries (absorb water-soluble nutrients) and lacteals (absorb fat-soluble nutrients).",
-        "Lipoproteins are complex particles consisting of a core of lipids (fats) surrounded by a shell of proteins, phospholipids, and cholesterol. They transport lipids through the bloodstream since fats are insoluble in water. TYPES: CHYLOMICRONS transport dietary fats from intestines to tissues; VLDL carry fats from liver to tissues; LDL transport cholesterol to tissues - when elevated, strongly linked to cardiovascular disease; HDL transport cholesterol from tissues back to liver for disposal - higher levels are protective against heart disease.",
-        "Chylomicrons are the largest lipoproteins, formed in intestinal cells after fat absorption. RESPONSIBILITIES: (1) Transport all absorbed dietary fats from small intestine to body tissues, (2) Carry fat-soluble vitamins (A, D, E, K) throughout the body, (3) Deliver triglycerides to muscle and adipose tissue for energy or storage, (4) Transport cholesterol and phospholipids for membrane synthesis and hormone production. PATHWAY: Travel from intestine → lymphatic system → bloodstream → tissues.",
-        "LIPID DIGESTION & ABSORPTION: (1) Bile salts emulsify large fat droplets, (2) Pancreatic lipase breaks triglycerides into fatty acids and monoglycerides, (3) These form micelles for absorption, (4) In intestinal cells, they're reassembled into triglycerides and packaged into chylomicrons, (5) Chylomicrons enter lymph → bloodstream. PROTEIN: (1) HCl and pepsin begin breakdown in stomach, (2) Pancreatic enzymes continue digestion, (3) Brush border peptidases break into amino acids, (4) Amino acids absorbed via capillaries. CARBOHYDRATE: (1) Amylase begins starch digestion, (2) Brush border enzymes break disaccharides into monosaccharides, (3) Only monosaccharides are absorbed via capillaries."
-      ],
-      notes: "SMALL INTESTINE ROLE:\nPRIMARY FUNCTION: More than 90% of the nutrients and water absorption\nSTRUCTURE: 22 feet long, 2,700 square feet surface area\nSECTIONS: Duodenum, Jejunum, Ileum\n\nSURFACE AREA ENHANCEMENT:\n1. PLICAE CIRCULARES: Large circular folds\n2. VILLI: Small projections, increase surface area 40-fold\n3. MICROVILLI: Microscopic projections, increase surface area 600-fold\n\nABSORPTION VESSELS:\n- CAPILLARIES: Water-soluble nutrients → portal blood → liver\n- LACTEALS: Fat-soluble nutrients → lymphatic system → bloodstream"
-    },
-    "Energy": {
-      questions: [
-        "What is ATP? Why is it so important?",
-        "What are the sources of fuel that recharge ATP?",
-        "What are the storage locations for the fuel?",
-        "What are the roles of insulin and glucagon regarding energy?"
-      ],
-      answers: [
-        "ATP (Adenosine Triphosphate) is the universal energy currency of cells. WHY IMPORTANT: (1) Provides immediate energy for all cellular processes including muscle contraction, nerve transmission, protein synthesis, and chemical reactions, (2) When ATP breaks down to ADP + phosphate, it releases energy that powers biological work, (3) ATP is constantly recycled - broken down and rebuilt thousands of times per day, (4) All cells depend on ATP for survival - without it, cellular processes stop and death occurs quickly.",
-        "The three main fuel sources that recharge ATP are: (1) GLUCOSE - the body's preferred fuel, especially for brain and nervous system. Provides quick energy through glycolysis or complete oxidation, (2) FATTY ACIDS - from stored body fat or dietary fat. Provide the most ATP per molecule through beta-oxidation, (3) AMINO ACIDS - from protein breakdown, used when glucose and fat are insufficient. The body prefers to spare protein for its structural and functional roles.",
-        "Fuel storage locations: (1) CARBOHYDRATE - approximately 100 grams glycogen in liver (maintains blood glucose), 400-500 grams in skeletal muscles. Total provides about 1,600-2,000 calories, (2) FAT - primarily in adipose tissue, providing 100,000+ calories in average person. Also stored as intramuscular triglycerides, (3) PROTEIN - no specific storage form; muscle mass can be broken down during starvation, but this damages body structure.",
-        "Insulin and glucagon work as opposing hormones: INSULIN (blood glucose HIGH): Promotes energy storage by stimulating glucose uptake, converting glucose to glycogen, promoting fat synthesis, enhancing protein synthesis - shifts metabolism toward storage mode. GLUCAGON (blood glucose LOW): Promotes energy mobilization by stimulating glycogen breakdown, promoting gluconeogenesis, stimulating fat breakdown - shifts metabolism toward fuel utilization. Together, they maintain blood glucose and ensure adequate fuel availability."
-      ],
-      notes: "ATP (Adenosine Triphosphate): Main energy currency for cells. Rechargeable chemical battery.\n\nFUEL MOLECULES:\n- GLUCOSE: Primary fuel\n- FATTY ACIDS: From fat breakdown\n- AMINO ACIDS: Can be used for energy if needed\n\nFUEL STORAGE:\n- LIVER: 100g glycogen\n- MUSCLES: 400g glycogen\n- ADIPOSE: ~100,000 calories as fat\n\nINSULIN vs GLUCAGON:\nINSULIN (high glucose): Promotes storage\nGLUCAGON (low glucose): Promotes fuel use"
-    },
-    "Chronic Diseases": {
-      questions: [
-        "Who is at risk for CVD? Who is at risk for Type 2 Diabetes? Who is at risk for hypertension?",
-        "What kind of diets are associated with greater risks for these diseases?",
-        "What are ways to lower the risk of developing chronic disease?",
-        "How do hormones impact diabetes?"
-      ],
-      answers: [
-        "CVD RISK: Family history, high LDL/low HDL cholesterol, high blood pressure, diabetes, smoking, physical inactivity, obesity, age (men >45, women >55). TYPE 2 DIABETES RISK: Family history, overweight/obesity, physical inactivity, age >45, previous gestational diabetes, certain ethnicities (African American, Hispanic, Native American, Asian American), high blood pressure. HYPERTENSION RISK: Family history, age, race (higher in African Americans), overweight/obesity, high sodium intake, excessive alcohol, smoking, chronic stress, kidney disease, sleep apnea.",
-        "DISEASE-PROMOTING DIETS: Western diet high in processed foods and refined sugars; high sodium intake from processed foods; diets high in saturated and trans fats; excessive refined carbohydrates and added sugars; low fiber intake; excessive calories leading to obesity; low fruit and vegetable consumption; high sugar-sweetened beverage consumption; frequent fast food; diets low in omega-3 fatty acids. These promote inflammation, insulin resistance, high blood pressure, and dyslipidemia.",
-        "PREVENTION STRATEGIES: DIETARY: plenty of fruits/vegetables, whole grains, lean proteins, limit saturated fat, avoid trans fats, reduce sodium, limit added sugars, maintain healthy weight. LIFESTYLE: regular physical activity, don't smoke, limit alcohol, manage stress, adequate sleep, social connections. MEDICAL: regular checkups, monitor blood pressure/cholesterol, diabetes screening, follow medical advice.",
-        "HORMONAL IMPACTS: (1) INSULIN RESISTANCE - cells become less responsive to insulin, requiring more insulin for glucose uptake. Eventually pancreas cannot produce enough, (2) PANCREATIC DYSFUNCTION - progressive loss of insulin-producing beta cells, (3) OTHER HORMONES - glucagon overproduction, cortisol raises blood glucose, growth hormone increases insulin resistance, incretin hormones may be impaired. (4) COMPLICATIONS - chronic high glucose damages blood vessels, kidneys, nerves, and eyes."
-      ],
-      notes: "CVD RISK: Family history, high LDL cholesterol, high blood pressure, diabetes, smoking, obesity\nDIABETES RISK: Family history, obesity, inactivity, age >45, certain ethnicities\nHYPERTENSION RISK: Family history, age, race, obesity, high sodium, alcohol, smoking, stress"
-    },
-    "Food Allergies": {
-      questions: [
-        "What are symptoms of allergies? What molecules make allergens? What are the top nine allergens? How are they different from intolerances?"
-      ],
-      answers: [
-        "ALLERGY SYMPTOMS: skin reactions (hives, itching, swelling, eczema), gastrointestinal (nausea, vomiting, diarrhea, cramping), respiratory (runny nose, coughing, wheezing, difficulty breathing), and systemic reactions (anaphylaxis - severe, whole-body reaction that can be fatal without epinephrine). ALLERGEN MOLECULES: typically PROTEINS that immune system mistakenly identifies as harmful. TOP 9 ALLERGENS: Milk, Eggs, Peanuts, Tree nuts, Fish, Shellfish, Soy, Wheat, Sesame. ALLERGIES vs INTOLERANCES: ALLERGIES involve immune system, can be life-threatening, symptoms appear quickly, small amounts trigger reactions. INTOLERANCES involve digestive system (like lactose intolerance), cause discomfort but not life-threatening, require larger amounts."
-      ],
-      notes: "SYMPTOMS: Hives, itching/swelling, difficulty breathing, diarrhea, vomiting. Range from mild to severe (anaphylaxis).\n\nALLERGENS: Proteins in food that trigger immune response\n\nTOP 9 ALLERGENS: Milk, Eggs, Peanuts, Tree nuts, Fish, Shellfish, Soy, Wheat, Sesame\n\nALLERGY vs INTOLERANCE:\n- ALLERGIES: Immune system involvement, can be life-threatening\n- INTOLERANCE: Digestive system, causes discomfort but not dangerous"
-    },
-    "Water": {
-      questions: [
-        "What are the functions of water in the body?",
-        "How much water do we need daily?",
-        "What makes water unique as a nutrient?"
-      ],
-      answers: [
-        "Water functions: (1) SOLVENT - dissolves and transports nutrients, hormones, and waste products, (2) TEMPERATURE REGULATION - maintains body temperature through sweating and circulation, (3) CUSHIONING - protects organs and joints, (4) CHEMICAL REACTIONS - provides medium for biochemical reactions, (5) STRUCTURAL COMPONENT - maintains cell shape and tissue structure, (6) WASTE ELIMINATION - helps kidneys filter waste, (7) DIGESTION - essential for saliva and digestive processes, (8) CIRCULATION - maintains blood volume and transports oxygen/nutrients.",
-        "Daily water needs: MEN - approximately 15.5 cups (3.7 liters) total fluids daily, WOMEN - approximately 11.5 cups (2.7 liters) total fluids daily. This includes water from beverages and food (about 20% from food). Needs increase with hot weather, physical activity, fever, pregnancy/breastfeeding, certain medications. Signs of adequate hydration: pale yellow urine and infrequent thirst.",
-        "Water is unique because: (1) POLAR MOLECULE - has positive and negative charges making it an excellent solvent, (2) ESSENTIAL QUANTITY - comprises 50-75% of body weight, (3) NO CALORIES - provides no energy but essential for life, (4) IMMEDIATE NEED - can only survive 3-5 days without it, (5) NOT STORED - requires constant replenishment, (6) UNIVERSAL SOLVENT - dissolves more substances than any other liquid, (7) TEMPERATURE STABILITY - remains liquid at body temperature."
-      ],
-      notes: "WATER: Universal solvent, chemically H2O. Body 60% water. Need 9-13 cups per day.\n\nFUNCTIONS: Transport substances, temperature regulation, cushion organs, chemical reactions, waste elimination\n\nUNIQUE: Polar molecule with positive/negative charges. Makes water good solvent.\n\nDAILY NEEDS:\n- Men: 15.5 cups (3.7 liters) fluids/day\n- Women: 11 cups (2.7 liters) fluids/day"
-    }
-  };
+  <!-- React, ReactDOM, Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-  const [expandedSections, setExpandedSections] = useState({});
-  const [completedTopics, setCompletedTopics] = useState(new Set());
-  const [searchTerm, setSearchTerm] = useState('');
-  const [showAnswers, setShowAnswers] = useState({});
-  const [showAddNote, setShowAddNote] = useState({});
-  const [newNote, setNewNote] = useState({});
-  const [userNotes, setUserNotes] = useState({});
+  <!-- Your Full React Code -->
+  <script type="text/babel">
+    const { useState } = React;
+    const { Search, Check, ChevronDown, ChevronRight, Calculator, Plus, BookOpen, HelpCircle } = lucide;
 
-  const toggleSection = (topic) => {
-    setExpandedSections(prev => ({
-      ...prev,
-      [topic]: !prev[topic]
-    }));
-  };
+    const EnhancedNutritionStudyGuide = () => {
+      const studyTopics = {
+        "Scientific Method": {
+          questions: [
+            "What are the steps of the scientific method?",
+            "What is the purpose of the scientific method?",
+            "Who reviews work before it's published?"
+          ],
+          answers: [
+            "The scientific method follows these systematic steps: (1) Observe patterns and phenomena, (2) Review prior knowledge and literature, then make hypotheses based on observations, (3) Conduct controlled experiments designed to test the hypothesis, (4) Analyze data and observations collected from experiments, (5) Draw conclusions based on the data analysis, and (6) Share findings with the scientific community to get peer feedback and allow for replication of studies.",
+            "The purpose of the scientific method is to provide a standardized, objective approach to understanding the natural world and testing theories. In nutrition science specifically, it allows researchers to systematically study how nutrients affect human health, establish cause-and-effect relationships, and develop evidence-based dietary recommendations. This methodology helps eliminate bias, ensures reproducibility, and builds reliable knowledge about nutrition and health.",
+            "Peer reviewers - typically other scientists and experts in the same field - review research work before it's published. This peer review process involves independent evaluation of the study's methodology, data analysis, conclusions, and scientific merit. Only after passing this rigorous review process can research be published in reputable scientific journals, ensuring quality and reliability of published nutrition research."
+          ],
+          notes: "SCIENTIFIC METHOD STEPS:\\n1. Observe patterns\\n2. Review prior knowledge and make hypotheses\\n3. Conduct controlled experiments around hypothesis\\n4. Analyze data and observations\\n5. Draw a conclusion\\n6. Share findings (to get feedback and repeat)\\n\\nNUTRITION SCIENCE: The scientific study of nutrients/the roles of nutrients in the body/how nutrients impact health and disease.\\n\\nRESEARCH METHODS:\\n- EPIDEMIOLOGY: Study of how disease rates vary among different population groups\\n- ANIMAL MODEL: Use of animals to study disease to understand more about human disease\\n- CASE-CONTROL STUDY: Study comparing individuals who have a disease with those who don't\\n- DOUBLE-BLIND STUDY: Experiment where neither participants nor researchers know participant assignments until completion"
+        },
+        "Nutrients": {
+          questions: [
+            "What are the three macronutrients? How many calories per gram do they each have?",
+            "What makes a nutrient essential? What are the essential nutrients?",
+            "How do you determine a food's energy density?"
+          ],
+          answers: [
+            "The three macronutrients are: (1) CARBOHYDRATES - provide 4 kilocalories per gram, (2) PROTEINS - provide 4 kilocalories per gram, and (3) FATS (LIPIDS) - provide 9 kilocalories per gram. Note that alcohol, while not a nutrient, provides 7 kilocalories per gram. These macronutrients are called 'macro' because the body needs them in large amounts (grams) compared to micronutrients (vitamins and minerals needed in milligrams or micrograms).",
+            "A nutrient is considered essential if it meets ALL THREE criteria: (1) A specific biological function in the body has been identified for that nutrient, (2) That specific function becomes impaired when the nutrient is removed from the diet, and (3) The same function is restored when the nutrient is added back to the diet. The essential nutrients include: 9 essential amino acids (from proteins), 2 essential fatty acids (omega-3 ALA and omega-6 LA), all 13 vitamins (A, D, E, K, C, and 8 B vitamins), approximately 15 essential minerals (including calcium, iron, zinc, etc.), and water.",
+            "Energy density is calculated using the formula: Energy Density = Total Calories ÷ Weight of Food (in grams). To find total calories, multiply grams of each macronutrient by their caloric values: carbohydrates × 4 kcal/g + proteins × 4 kcal/g + fats × 9 kcal/g = total calories. Then divide by the food's weight in grams. Foods with higher energy density provide more calories per gram (like nuts, oils), while foods with lower energy density provide fewer calories per gram (like fruits, vegetables with high water content)."
+          ],
+          notes: "THE THREE MACRONUTRIENTS AND CALORIES PER GRAM:\\n1. CARBOHYDRATES: 4 kcal per gram\\n2. PROTEINS: 4 kcal per gram\\n3. FATS (LIPIDS): 9 kcal per gram\\n(Note: Alcohol = 7 kcal per gram, but not a nutrient)\\n\\nWHAT MAKES A NUTRIENT ESSENTIAL:\\nMUST MEET ALL 3 CRITERIA:\\n1. A specific function in the body has been identified for the nutrient\\n2. That function is impaired if the nutrient is removed from the diet\\n3. The same function is restored if the nutrient is added back to the diet\\n\\nESSENTIAL NUTRIENTS:\\n- 9 Essential amino acids (from proteins)\\n- 2 Essential fatty acids: omega-3 (ALA) and omega-6 (LA)\\n- All vitamins (13 vitamins)\\n- All minerals (15+ minerals)\\n- Water"
+        },
+        "Carbohydrates": {
+          questions: [
+            "What is a complex carbohydrate? What is the structure of it?",
+            "What is high-fructose corn syrup? Why is it considered 'bad' for you?",
+            "What is fiber? What happens to it in the gastrointestinal tract?"
+          ],
+          answers: [
+            "A complex carbohydrate is a large molecule made up of many glucose units linked together in long chains. STRUCTURE: Complex carbohydrates include starch and fiber. STARCH has glucose units connected by ALPHA bonds that digestive enzymes can break (amylose is unbranched, amylopectin is branched). FIBER has glucose units connected by BETA bonds that human enzymes cannot break. Complex carbs provide sustained energy because they take time to digest and break down into individual glucose molecules, unlike simple sugars that are rapidly absorbed.",
+            "High-fructose corn syrup (HFCS) is a liquid sweetener containing about 55% fructose and 45% glucose (similar to sucrose which is 50/50). WHY IT'S CONSIDERED PROBLEMATIC: (1) Very cheap to produce, leading to overuse in processed foods, (2) Americans consume about 60 pounds per year, (3) Fructose metabolism differs from glucose - it bypasses normal blood sugar regulation, (4) Research suggests it may promote fat storage more than regular sugar, (5) Linked to increased visceral (belly) fat accumulation. However, current research shows HFCS is metabolically similar to regular sugar - the main issue is overconsumption of any added sugars.",
+            "Fiber is the indigestible part of plant foods, consisting of carbohydrates with BETA bonds that human enzymes cannot break. IN THE GI TRACT: Fiber passes through the stomach and small intestine largely intact since we lack enzymes to digest it. In the large intestine (colon), beneficial bacteria ferment some types of fiber, producing beneficial compounds like short-chain fatty acids. Fiber adds bulk to stool, helps maintain bowel regularity, slows nutrient absorption (which helps control blood sugar and cholesterol), and provides food for healthy gut bacteria."
+          ],
+          notes: "COMPLEX CARBOHYDRATES:\nSTARCH: Glucose linked with ALPHA BONDS (digestible)\n- AMYLOSE (20-25%): Unbranched\n- AMYLOPECTIN (75-80%): Branched, most abundant\n\nFIBER: Glucose linked with BETA BONDS (NOT digestible)\n- INSOLUBLE: Doesn't dissolve, adds bulk, prevents constipation\n- SOLUBLE: Dissolves in water, bacteria ferment it, lowers cholesterol, improves glucose control\n\nHIGH-FRUCTOSE CORN SYRUP: 55% fructose, 45% glucose. Americans consume 60lbs/year. Provides extra calories without beneficial nutrients."
+        },
+        "Lipids": {
+          questions: [
+            "What is the difference between a fat and an oil?",
+            "What is an Omega-3 fatty acid? What is an omega-6 fatty acid?",
+            "What are EPA and DHA? How are they different from ALA?"
+          ],
+          answers: [
+            "The difference between fats and oils is their physical state at room temperature, which reflects their chemical composition: FATS are solid at room temperature and contain more SATURATED fatty acids (no double bonds between carbons, allowing molecules to pack tightly together). Examples include butter, lard, coconut oil. OILS are liquid at room temperature and contain more UNSATURATED fatty acids (one or more double bonds creating 'kinks' that prevent tight packing). Examples include olive oil, canola oil, sunflower oil.",
+            "OMEGA-3 FATTY ACIDS are essential polyunsaturated fats with the first double bond located at the third carbon from the omega (methyl) end of the fatty acid chain. They are anti-inflammatory and support heart and brain health. OMEGA-6 FATTY ACIDS are essential polyunsaturated fats with the first double bond at the sixth carbon from the omega end. While essential, they tend to be pro-inflammatory when consumed in excess relative to omega-3s. The modern Western diet contains too much omega-6 (from vegetable oils) relative to omega-3s, creating an inflammatory imbalance.",
+            "EPA (Eicosapentaenoic Acid) and DHA (Docosahexaenoic Acid) are long-chain omega-3 fatty acids found primarily in fatty fish, algae, and seafood. ALA (Alpha-Linolenic Acid) is a shorter-chain omega-3 found in plant sources like flaxseeds, walnuts, and chia seeds. DIFFERENCES: EPA has strong anti-inflammatory effects and supports cardiovascular health; DHA is crucial for brain function, eye health, and nervous system development; ALA can be converted to EPA and DHA but very inefficiently (only 1-10% conversion rate). Therefore, direct consumption of EPA/DHA from fish or algae is more effective than relying on ALA conversion."
+          ],
+          notes: "FAT vs OIL:\n- FAT: Solid at room temperature, higher saturated fatty acids (butter, bacon)\n- OIL: Liquid at room temperature, higher unsaturated fats (seeds, nuts, olives)\n\nESSENTIAL FATTY ACIDS:\nOMEGA-3 (ALA): First double bond at 3rd carbon. Anti-inflammatory. Sources: flaxseeds, walnuts, fish\n- EPA/DHA: From fish, can lower heart disease risk\nOMEGA-6 (LA): First double bond at 6th carbon. Pro-inflammatory. Sources: plant oils, nuts"
+        },
+                "Vitamins and Minerals": {
+          questions: [
+            "What is a vitamin? What are the characteristics of it?",
+            "What is the importance of minerals such as calcium and iron?",
+            "What are the differences between fat-soluble and water-soluble vitamins?"
+          ],
+          answers: [
+            "A vitamin is an organic compound that the body needs in very small amounts (milligrams or micrograms) to help regulate and support chemical reactions and maintain normal physiological functions. Key characteristics: (1) All vitamins are essential nutrients - the body cannot make them in sufficient quantities, (2) They are needed in tiny amounts but have crucial roles, (3) They act as antioxidants, coenzymes, and hormone precursors, (4) Deficiency causes specific diseases, (5) They can be destroyed by heat, light, air, or alkaline conditions, (6) They are organic molecules containing carbon.",
+            "CALCIUM importance: Forms the structural framework of bones and teeth (99% of body calcium), essential for muscle contraction including heart muscle, required for nerve signal transmission, needed for blood clotting, helps regulate blood pressure. Deficiency leads to osteoporosis, fractures, and poor bone development in children. IRON importance: Essential component of hemoglobin (carries oxygen in blood) and myoglobin (stores oxygen in muscles), part of enzymes involved in energy metabolism, supports immune function. Iron deficiency causes anemia (fatigue, weakness, pale skin, shortness of breath), and is the most common nutrient deficiency worldwide.",
+            "FAT-SOLUBLE VITAMINS (A, D, E, K): Dissolved and transported in fats, stored in liver and fatty tissues, can accumulate to toxic levels if consumed excessively, absorbed along with dietary fats in small intestine, don't need daily consumption due to storage, require bile for absorption. WATER-SOLUBLE VITAMINS (C and 8 B vitamins): Dissolve in water, not stored significantly in body, excess amounts excreted in urine, need regular consumption (except B12 which can be stored), easily lost in cooking water, generally not toxic in excess."
+          ],
+          notes: "FAT-SOLUBLE VITAMINS (A, D, E, K): Stored in liver and fatty tissues, potential toxicity if excess\nWATER-SOLUBLE VITAMINS: B's and C, dissolved in water, excreted in urine\n\nIMPORTANT FUNCTIONS:\n- CALCIUM: Bone structure, muscle contraction\n- IRON: Component of hemoglobin, prevents anemia\n- SODIUM/POTASSIUM: Water balance, nerve signals\n- IODINE: Thyroid hormone component"
+        },
+        "Healthy Eating": {
+          questions: [
+            "What is considered 'healthy eating?'",
+            "Why should foods high in sodium and saturated fat be limited in the diet?",
+            "What types of foods are higher in sodium and saturated fat?",
+            "What are psychological factors that encourage a person to eat?"
+          ],
+          answers: [
+            "Healthy eating involves consuming a balanced diet that provides adequate nutrition while supporting overall health and disease prevention. It includes: eating a variety of foods from all food groups (fruits, vegetables, whole grains, lean proteins, healthy fats), choosing nutrient-dense foods over calorie-dense but nutrient-poor foods, limiting added sugars, saturated fats, and sodium, maintaining appropriate portion sizes, staying hydrated, and considering individual needs based on age, activity level, and health conditions.",
+            "Foods high in sodium and saturated fat should be limited because: SODIUM excess increases blood pressure (hypertension), which raises the risk of stroke, heart disease, and kidney disease. The body only needs about 500mg sodium daily, but Americans consume 2300-3400mg on average. SATURATED FAT raises LDL ('bad') cholesterol levels in the blood, contributing to atherosclerosis (plaque buildup in arteries), which increases risk of heart disease and stroke.",
+            "Foods highest in SODIUM include: processed meats (bacon, deli meats, sausages), canned soups and broths, frozen meals, restaurant foods, chips and salty snacks, cheese, bread and baked goods, condiments and sauces. Foods highest in SATURATED FAT include: fatty cuts of meat (ribeye, ground beef), full-fat dairy products (butter, whole milk, cheese, ice cream), coconut and palm oils, fried foods, baked goods made with solid fats, and processed snack foods.",
+            "Psychological factors that encourage eating include: SENSORY factors (appealing taste, smell, texture, color, temperature), SOCIAL factors (eating with others, cultural traditions, learned behaviors from family), EMOTIONAL factors (stress eating, comfort foods, eating when bored or sad), ENVIRONMENTAL cues (food advertising, seeing food, accessibility), LEARNED ASSOCIATIONS (linking certain foods with celebrations or rewards), and APPETITE (external cues that stimulate eating even without hunger)."
+          ],
+          notes: "PSYCHOLOGICAL FACTORS:\n\nHUNGER vs APPETITE vs SATIETY:\n- HUNGER: Primary physiological (internal) drive to find and eat food\n- APPETITE: Primary physiological (external) influences that encourage eating, often without obvious hunger\n- SATIETY: State where no longer desire to eat, feeling of satisfaction\n\nSENSORY FACTORS: Flavor (taste and smell), umami (meaty/savory), texture, color, moisture, temperature\n\nSOCIAL FACTORS:\n- Eating is social event\n- Learn by watching parents/peers\n- FOOD COST: Major determinant of choices\n- Income affects fruit/vegetable purchases"
+        },
+        "Protein": {
+          questions: [
+            "What is the difference between a complete and incomplete protein?"
+          ],
+          answers: [
+            "COMPLETE PROTEINS contain all 9 essential amino acids in adequate proportions that the human body needs but cannot produce on its own. These proteins can support protein synthesis and growth without needing to be combined with other protein sources. Examples include: animal proteins (meat, poultry, fish, eggs, dairy), quinoa, soy products (tofu, tempeh), buckwheat, hemp seeds, and chia seeds. INCOMPLETE PROTEINS are missing one or more of the essential amino acids or contain them in insufficient amounts. Examples include most plant proteins: beans and legumes (low in methionine), grains (low in lysine), nuts and seeds (variable deficiencies). However, incomplete proteins can be combined throughout the day to create a complete amino acid profile - this is called protein complementation."
+          ],
+          notes: "COMPLETE PROTEINS: Contain all 9 essential amino acids in adequate amounts. Examples: meat, eggs, dairy, soy, quinoa.\n\nINCOMPLETE PROTEINS: Missing or low in some essential amino acids. Most plant proteins (beans, nuts, grains). Can combine different incomplete proteins to get all 9 essential amino acids.\n\nCOMPLEMENTARY FOODS: Eating different incomplete proteins together to make up for all 9 essential amino acids."
+        },
+        "Genetic Code for Building Protein": {
+          questions: [
+            "Why are essential amino acids important?",
+            "What is protein synthesis?",
+            "What is the importance of protein's shape?",
+            "How can genetic disorders impact protein?"
+          ],
+          answers: [
+            "Essential amino acids are important because: (1) The body cannot produce them in sufficient quantities, so they must be obtained from food, (2) All 9 essential amino acids must be present simultaneously for protein synthesis to occur - if even one is missing, protein synthesis stops, (3) They serve as building blocks for creating all body proteins including enzymes, hormones, antibodies, structural proteins, and transport proteins, (4) They support growth, tissue repair, immune function, and metabolism.",
+            "Protein synthesis is the process by which cells create proteins from amino acids according to instructions in DNA. PROCESS: (1) TRANSCRIPTION - DNA instructions are copied to messenger RNA (mRNA) in the nucleus, (2) TRANSLATION - mRNA moves to ribosomes where it's 'read' in groups of three nucleotides (codons), (3) Each codon codes for a specific amino acid, (4) Transfer RNA (tRNA) brings the correct amino acids to the ribosome, (5) Amino acids are linked together in the correct sequence to form a polypeptide chain, (6) The chain folds into its functional 3D shape.",
+            "Protein shape is crucial because structure determines function - a protein's 3D shape determines what it can do in the body. IMPORTANCE: (1) ENZYME ACTIVITY - enzymes must have the correct shape for their active site to bind substrates, (2) HORMONE FUNCTION - hormones like insulin must have proper shape to bind to receptors, (3) ANTIBODY RECOGNITION - antibodies recognize specific shapes on pathogens, (4) TRANSPORT - hemoglobin's shape allows it to carry oxygen, (5) STRUCTURE - collagen's triple helix provides strength to connective tissue.",
+            "Genetic disorders can impact proteins in several ways: (1) GENETIC MUTATIONS can change the amino acid sequence, altering protein shape and function (example: sickle cell anemia creates abnormal hemoglobin), (2) MISSING ENZYMES - genetic defects can prevent production of specific enzymes (example: Phenylketonuria/PKU - cannot make enzyme to metabolize phenylalanine, leading to toxic buildup and mental retardation if untreated), (3) ALTERED PROTEIN STRUCTURE - mutations can create unstable or non-functional proteins."
+          ],
+          notes: "PROTEIN STRUCTURE: Made of carbon, hydrogen, oxygen, NITROGEN. All composed of same 20 amino acids. Shape determines function.\n\nESSENTIAL AMINO ACIDS: 9 of 20 are essential (must get from food). Body can't make proteins without all 9.\n\nPROTEIN FUNCTIONS:\n- STRUCTURE: Collagen for bones/tissues\n- ANTIBODIES: Fight infection\n- ENZYMES: Speed up reactions\n- TRANSPORT: Hemoglobin carries oxygen\n- HORMONES: Insulin, growth hormone\n- ENERGY: 4 calories per gram\n\nPHENYLKETONURIA (PKU): Genetic defect, can't metabolize phenylalanine. Causes mental retardation if untreated."
+        },
+        "Hormones and Enzymes": {
+          questions: [
+            "What is an enzyme? How does it work?",
+            "What is a hormone? How does it work?",
+            "What impact do hormones and enzymes have on the body?",
+            "What hormones does the pancreas secrete? What causes the pancreas to secrete them individually?"
+          ],
+          answers: [
+            "An enzyme is a protein that acts as a biological catalyst, speeding up chemical reactions in the body without being consumed in the process. HOW IT WORKS: (1) The substrate (molecule to be changed) binds to the enzyme's active site - a specifically shaped region that fits the substrate like a lock and key, (2) The enzyme stabilizes the substrate and lowers the activation energy needed for the reaction, (3) The substrate is converted to product(s), (4) The product(s) are released, and the enzyme is free to catalyze another reaction.",
+            "A hormone is a chemical messenger produced by glands and released into the bloodstream to coordinate and regulate various body functions. HOW IT WORKS: (1) A gland releases a hormone into the bloodstream in response to a specific stimulus, (2) The hormone travels through the blood to target organs or tissues, (3) The hormone binds to specific receptor proteins on or in target cells, (4) This binding triggers specific cellular responses or changes in gene expression, (5) The response helps maintain homeostasis or coordinates body functions.",
+            "ENZYME IMPACTS: Essential for virtually all body functions - digestion (breaking down food), metabolism (converting nutrients to energy), DNA repair, protein synthesis, detoxification, and thousands of other reactions. Without enzymes, body chemistry would be too slow to sustain life. HORMONE IMPACTS: Coordinate major body functions including growth and development, metabolism and energy balance, reproduction, stress response, sleep cycles, mood regulation, blood sugar control, and homeostasis.",
+            "The pancreas secretes two main hormones with opposite effects: INSULIN - released when blood glucose is HIGH (after eating). Insulin promotes glucose uptake by cells, glucose storage as glycogen, fat storage, and protein synthesis. It lowers blood glucose levels. GLUCAGON - released when blood glucose is LOW (between meals, during fasting). Glucagon promotes breakdown of stored glycogen to release glucose, stimulates gluconeogenesis (making glucose from other sources), and promotes fat breakdown for energy. It raises blood glucose levels."
+          ],
+          notes: "HORMONES: Chemical signals that coordinate reactions. Travel through body to find receptor proteins on target cells.\n\nPANCREAS HORMONES:\n- INSULIN: Released when blood glucose HIGH. Promotes glucose storage, fat storage, protein production\n- GLUCAGON: Released when blood glucose LOW. Promotes use of stored glucose, fat use, gluconeogenesis\n\nENZYMES: Speed up chemical reactions, not altered by reaction. Almost all are proteins. Stay where made.\n\nDIGESTIVE ENZYMES:\n- AMYLASE: Breaks down starch (mouth, pancreas)\n- PEPSIN: Breaks down proteins (stomach)\n- LIPASE: Breaks down fats (stomach, pancreas)\n- MALTASE, SUCRASE, LACTASE: Break disaccharides (small intestine)"
+        },
+        "Digestive System": {
+          questions: [
+            "What role does the small intestine play? Know the details.",
+            "What are lipoproteins? What are they responsible for?",
+            "What are chylomicrons? What are they responsible for?",
+            "How are lipids digested and absorbed? Proteins? Carbohydrates?"
+          ],
+          answers: [
+            "The small intestine is the primary site of nutrient digestion and absorption, responsible for over 90% of nutrient and water absorption. STRUCTURE: About 22 feet long with massive surface area (2,700 square feet) created by three levels of folding: (1) Plicae circulares (large circular folds), (2) Villi (finger-like projections), (3) Microvilli (microscopic projections forming the 'brush border'). SECTIONS: Duodenum (receives pancreatic enzymes and bile), Jejunum (primary absorption site), Ileum (absorbs B12, bile salts). Each villus contains capillaries (absorb water-soluble nutrients) and lacteals (absorb fat-soluble nutrients).",
+            "Lipoproteins are complex particles consisting of a core of lipids (fats) surrounded by a shell of proteins, phospholipids, and cholesterol. They transport lipids through the bloodstream since fats are insoluble in water. TYPES: CHYLOMICRONS transport dietary fats from intestines to tissues; VLDL carry fats from liver to tissues; LDL transport cholesterol to tissues - when elevated, strongly linked to cardiovascular disease; HDL transport cholesterol from tissues back to liver for disposal - higher levels are protective against heart disease.",
+            "Chylomicrons are the largest lipoproteins, formed in intestinal cells after fat absorption. RESPONSIBILITIES: (1) Transport all absorbed dietary fats from small intestine to body tissues, (2) Carry fat-soluble vitamins (A, D, E, K) throughout the body, (3) Deliver triglycerides to muscle and adipose tissue for energy or storage, (4) Transport cholesterol and phospholipids for membrane synthesis and hormone production. PATHWAY: Travel from intestine → lymphatic system → bloodstream → tissues.",
+            "LIPID DIGESTION & ABSORPTION: (1) Bile salts emulsify large fat droplets, (2) Pancreatic lipase breaks triglycerides into fatty acids and monoglycerides, (3) These form micelles for absorption, (4) In intestinal cells, they're reassembled into triglycerides and packaged into chylomicrons, (5) Chylomicrons enter lymph → bloodstream. PROTEIN: (1) HCl and pepsin begin breakdown in stomach, (2) Pancreatic enzymes continue digestion, (3) Brush border peptidases break into amino acids, (4) Amino acids absorbed via capillaries. CARBOHYDRATE: (1) Amylase begins starch digestion, (2) Brush border enzymes break disaccharides into monosaccharides, (3) Only monosaccharides are absorbed via capillaries."
+          ],
+          notes: "SMALL INTESTINE ROLE:\nPRIMARY FUNCTION: More than 90% of the nutrients and water absorption\nSTRUCTURE: 22 feet long, 2,700 square feet surface area\nSECTIONS: Duodenum, Jejunum, Ileum\n\nSURFACE AREA ENHANCEMENT:\n1. PLICAE CIRCULARES: Large circular folds\n2. VILLI: Small projections, increase surface area 40-fold\n3. MICROVILLI: Microscopic projections, increase surface area 600-fold\n\nABSORPTION VESSELS:\n- CAPILLARIES: Water-soluble nutrients → portal blood → liver\n- LACTEALS: Fat-soluble nutrients → lymphatic system → bloodstream"
+        },
+        "Energy": {
+          questions: [
+            "What is ATP? Why is it so important?",
+            "What are the sources of fuel that recharge ATP?",
+            "What are the storage locations for the fuel?",
+            "What are the roles of insulin and glucagon regarding energy?"
+          ],
+          answers: [
+            "ATP (Adenosine Triphosphate) is the universal energy currency of cells. WHY IMPORTANT: (1) Provides immediate energy for all cellular processes including muscle contraction, nerve transmission, protein synthesis, and chemical reactions, (2) When ATP breaks down to ADP + phosphate, it releases energy that powers biological work, (3) ATP is constantly recycled - broken down and rebuilt thousands of times per day, (4) All cells depend on ATP for survival - without it, cellular processes stop and death occurs quickly.",
+            "The three main fuel sources that recharge ATP are: (1) GLUCOSE - the body's preferred fuel, especially for brain and nervous system. Provides quick energy through glycolysis or complete oxidation, (2) FATTY ACIDS - from stored body fat or dietary fat. Provide the most ATP per molecule through beta-oxidation, (3) AMINO ACIDS - from protein breakdown, used when glucose and fat are insufficient. The body prefers to spare protein for its structural and functional roles.",
+            "Fuel storage locations: (1) CARBOHYDRATE - approximately 100 grams glycogen in liver (maintains blood glucose), 400-500 grams in skeletal muscles. Total provides about 1,600-2,000 calories, (2) FAT - primarily in adipose tissue, providing 100,000+ calories in average person. Also stored as intramuscular triglycerides, (3) PROTEIN - no specific storage form; muscle mass can be broken down during starvation, but this damages body structure.",
+            "Insulin and glucagon work as opposing hormones: INSULIN (blood glucose HIGH): Promotes energy storage by stimulating glucose uptake, converting glucose to glycogen, promoting fat synthesis, enhancing protein synthesis - shifts metabolism toward storage mode. GLUCAGON (blood glucose LOW): Promotes energy mobilization by stimulating glycogen breakdown, promoting gluconeogenesis, stimulating fat breakdown - shifts metabolism toward fuel utilization. Together, they maintain blood glucose and ensure adequate fuel availability."
+          ],
+          notes: "ATP (Adenosine Triphosphate): Main energy currency for cells. Rechargeable chemical battery.\n\nFUEL MOLECULES:\n- GLUCOSE: Primary fuel\n- FATTY ACIDS: From fat breakdown\n- AMINO ACIDS: Can be used for energy if needed\n\nFUEL STORAGE:\n- LIVER: 100g glycogen\n- MUSCLES: 400g glycogen\n- ADIPOSE: ~100,000 calories as fat\n\nINSULIN vs GLUCAGON:\nINSULIN (high glucose): Promotes storage\nGLUCAGON (low glucose): Promotes fuel use"
+        },
+        "Chronic Diseases": {
+          questions: [
+            "Who is at risk for CVD? Who is at risk for Type 2 Diabetes? Who is at risk for hypertension?",
+            "What kind of diets are associated with greater risks for these diseases?",
+            "What are ways to lower the risk of developing chronic disease?",
+            "How do hormones impact diabetes?"
+          ],
+          answers: [
+            "CVD RISK: Family history, high LDL/low HDL cholesterol, high blood pressure, diabetes, smoking, physical inactivity, obesity, age (men >45, women >55). TYPE 2 DIABETES RISK: Family history, overweight/obesity, physical inactivity, age >45, previous gestational diabetes, certain ethnicities (African American, Hispanic, Native American, Asian American), high blood pressure. HYPERTENSION RISK: Family history, age, race (higher in African Americans), overweight/obesity, high sodium intake, excessive alcohol, smoking, chronic stress, kidney disease, sleep apnea.",
+            "DISEASE-PROMOTING DIETS: Western diet high in processed foods and refined sugars; high sodium intake from processed foods; diets high in saturated and trans fats; excessive refined carbohydrates and added sugars; low fiber intake; excessive calories leading to obesity; low fruit and vegetable consumption; high sugar-sweetened beverage consumption; frequent fast food; diets low in omega-3 fatty acids. These promote inflammation, insulin resistance, high blood pressure, and dyslipidemia.",
+            "PREVENTION STRATEGIES: DIETARY: plenty of fruits/vegetables, whole grains, lean proteins, limit saturated fat, avoid trans fats, reduce sodium, limit added sugars, maintain healthy weight. LIFESTYLE: regular physical activity, don't smoke, limit alcohol, manage stress, adequate sleep, social connections. MEDICAL: regular checkups, monitor blood pressure/cholesterol, diabetes screening, follow medical advice.",
+            "HORMONAL IMPACTS: (1) INSULIN RESISTANCE - cells become less responsive to insulin, requiring more insulin for glucose uptake. Eventually pancreas cannot produce enough, (2) PANCREATIC DYSFUNCTION - progressive loss of insulin-producing beta cells, (3) OTHER HORMONES - glucagon overproduction, cortisol raises blood glucose, growth hormone increases insulin resistance, incretin hormones may be impaired. (4) COMPLICATIONS - chronic high glucose damages blood vessels, kidneys, nerves, and eyes."
+          ],
+          notes: "CVD RISK: Family history, high LDL cholesterol, high blood pressure, diabetes, smoking, obesity\nDIABETES RISK: Family history, obesity, inactivity, age >45, certain ethnicities\nHYPERTENSION RISK: Family history, age, race, obesity, high sodium, alcohol, smoking, stress"
+        },
+        "Food Allergies": {
+          questions: [
+            "What are symptoms of allergies? What molecules make allergens? What are the top nine allergens? How are they different from intolerances?"
+          ],
+          answers: [
+            "ALLERGY SYMPTOMS: skin reactions (hives, itching, swelling, eczema), gastrointestinal (nausea, vomiting, diarrhea, cramping), respiratory (runny nose, coughing, wheezing, difficulty breathing), and systemic reactions (anaphylaxis - severe, whole-body reaction that can be fatal without epinephrine). ALLERGEN MOLECULES: typically PROTEINS that immune system mistakenly identifies as harmful. TOP 9 ALLERGENS: Milk, Eggs, Peanuts, Tree nuts, Fish, Shellfish, Soy, Wheat, Sesame. ALLERGIES vs INTOLERANCES: ALLERGIES involve immune system, can be life-threatening, symptoms appear quickly, small amounts trigger reactions. INTOLERANCES involve digestive system (like lactose intolerance), cause discomfort but not life-threatening, require larger amounts."
+          ],
+          notes: "SYMPTOMS: Hives, itching/swelling, difficulty breathing, diarrhea, vomiting. Range from mild to severe (anaphylaxis).\n\nALLERGENS: Proteins in food that trigger immune response\n\nTOP 9 ALLERGENS: Milk, Eggs, Peanuts, Tree nuts, Fish, Shellfish, Soy, Wheat, Sesame\n\nALLERGY vs INTOLERANCE:\n- ALLERGIES: Immune system involvement, can be life-threatening\n- INTOLERANCE: Digestive system, causes discomfort but not dangerous"
+        },
+        "Water": {
+          questions: [
+            "What are the functions of water in the body?",
+            "How much water do we need daily?",
+            "What makes water unique as a nutrient?"
+          ],
+          answers: [
+            "Water functions: (1) SOLVENT - dissolves and transports nutrients, hormones, and waste products, (2) TEMPERATURE REGULATION - maintains body temperature through sweating and circulation, (3) CUSHIONING - protects organs and joints, (4) CHEMICAL REACTIONS - provides medium for biochemical reactions, (5) STRUCTURAL COMPONENT - maintains cell shape and tissue structure, (6) WASTE ELIMINATION - helps kidneys filter waste, (7) DIGESTION - essential for saliva and digestive processes, (8) CIRCULATION - maintains blood volume and transports oxygen/nutrients.",
+            "Daily water needs: MEN - approximately 15.5 cups (3.7 liters) total fluids daily, WOMEN - approximately 11.5 cups (2.7 liters) total fluids daily. This includes water from beverages and food (about 20% from food). Needs increase with hot weather, physical activity, fever, pregnancy/breastfeeding, certain medications. Signs of adequate hydration: pale yellow urine and infrequent thirst.",
+            "Water is unique because: (1) POLAR MOLECULE - has positive and negative charges making it an excellent solvent, (2) ESSENTIAL QUANTITY - comprises 50-75% of body weight, (3) NO CALORIES - provides no energy but essential for life, (4) IMMEDIATE NEED - can only survive 3-5 days without it, (5) NOT STORED - requires constant replenishment, (6) UNIVERSAL SOLVENT - dissolves more substances than any other liquid, (7) TEMPERATURE STABILITY - remains liquid at body temperature."
+          ],
+          notes: "WATER: Universal solvent, chemically H2O. Body 60% water. Need 9-13 cups per day.\n\nFUNCTIONS: Transport substances, temperature regulation, cushion organs, chemical reactions, waste elimination\n\nUNIQUE: Polar molecule with positive/negative charges. Makes water good solvent.\n\nDAILY NEEDS:\n- Men: 15.5 cups (3.7 liters) fluids/day\n- Women: 11 cups (2.7 liters) fluids/day"
+        }
+          }; <!-- this closes the studyTopics object -->
 
-  const toggleCompleted = (topic) => {
-    setCompletedTopics(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(topic)) {
-        newSet.delete(topic);
-      } else {
-        newSet.add(topic);
-      }
-      return newSet;
-    });
-  };
+      const [expandedSections, setExpandedSections] = useState({});
+      const [completedTopics, setCompletedTopics] = useState(new Set());
+      const [searchTerm, setSearchTerm] = useState('');
+      const [showAnswers, setShowAnswers] = useState({});
 
-  const toggleAnswers = (topic) => {
-    setShowAnswers(prev => ({
-      ...prev,
-      [topic]: !prev[topic]
-    }));
-  };
+      const toggleSection = (topic) => {
+        setExpandedSections(prev => ({ ...prev, [topic]: !prev[topic] }));
+      };
 
-  const toggleAddNote = (topic) => {
-    setShowAddNote(prev => ({
-      ...prev,
-      [topic]: !prev[topic]
-    }));
-  };
+      const toggleCompleted = (topic) => {
+        setCompletedTopics(prev => {
+          const newSet = new Set(prev);
+          if (newSet.has(topic)) newSet.delete(topic);
+          else newSet.add(topic);
+          return newSet;
+        });
+      };
 
-  const handleNoteChange = (topic, value) => {
-    setNewNote(prev => ({
-      ...prev,
-      [topic]: value
-    }));
-  };
+      const toggleAnswers = (topic) => {
+        setShowAnswers(prev => ({ ...prev, [topic]: !prev[topic] }));
+      };
 
-  const saveNote = (topic) => {
-    if (newNote[topic]?.trim()) {
-      setUserNotes(prev => ({
-        ...prev,
-        [topic]: [...(prev[topic] || []), newNote[topic].trim()]
-      }));
-      setNewNote(prev => ({
-        ...prev,
-        [topic]: ''
-      }));
-      setShowAddNote(prev => ({
-        ...prev,
-        [topic]: false
-      }));
-    }
-  };
+      const filteredTopics = Object.entries(studyTopics).filter(([topic, data]) => {
+        if (!searchTerm) return true;
+        const searchLower = searchTerm.toLowerCase();
+        return (
+          topic.toLowerCase().includes(searchLower) ||
+          data.questions.some(q => q.toLowerCase().includes(searchLower)) ||
+          data.notes.toLowerCase().includes(searchLower) ||
+          (data.answers && data.answers.some(a => a.toLowerCase().includes(searchLower)))
+        );
+      });
 
-  const deleteNote = (topic, noteIndex) => {
-    setUserNotes(prev => ({
-      ...prev,
-      [topic]: prev[topic].filter((_, index) => index !== noteIndex)
-    }));
-  };
-
-  const filteredTopics = Object.entries(studyTopics).filter(([topic, data]) => {
-    if (!searchTerm) return true;
-    const searchLower = searchTerm.toLowerCase();
-    return topic.toLowerCase().includes(searchLower) ||
-           data.questions.some(q => q.toLowerCase().includes(searchLower)) ||
-           data.notes.toLowerCase().includes(searchLower) ||
-           (data.answers && data.answers.some(a => a.toLowerCase().includes(searchLower)));
-  });
-
-  return (
-    <div className="max-w-6xl mx-auto p-6 bg-white">
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">NSD 225 Nutrition Study Guide</h1>
-        <p className="text-gray-600">Complete exam outline with comprehensive answers and notes!</p>
-        <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-blue-800 text-sm mb-2">
-            <strong>Exam Format:</strong> Multiple choice, paper exam with bubble sheet. 
-            Know multiplication by 4 & 9, addition to hundreds (no calculator allowed).
-          </p>
-          <div className="flex items-center justify-center space-x-2 text-blue-700">
-            <Calculator className="w-4 h-4" />
-            <span className="text-xs">Fats: 9kcal/g | Carbs: 4kcal/g | Proteins: 4kcal/g</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Search Bar */}
-      <div className="relative mb-6">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search topics, questions, answers, or notes..."
-          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-      </div>
-
-      {/* Progress Overview */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <span className="font-medium">Study Progress</span>
-          <span className="text-sm text-gray-600">
-            {completedTopics.size} of {Object.keys(studyTopics).length} topics completed
-          </span>
-        </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <div 
-            className="bg-green-500 h-2 rounded-full transition-all duration-300"
-            style={{ width: `${(completedTopics.size / Object.keys(studyTopics).length) * 100}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Study Content */}
-      <div className="space-y-4">
-        {filteredTopics.map(([topic, data]) => (
-          <div key={topic} className="border border-gray-200 rounded-lg">
-            <div 
-              className={`flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 ${
-                completedTopics.has(topic) ? 'bg-green-50' : ''
-              }`}
-              onClick={() => toggleSection(topic)}
-            >
-              <div className="flex items-center space-x-3">
-                {expandedSections[topic] ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
-                <h3 className="font-semibold text-gray-800">{topic}</h3>
-                <div className="flex space-x-2">
-                  <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                    {data.questions.length} questions
-                  </span>
-                  <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
-                    answers
-                  </span>
-                  <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">
-                    notes
-                  </span>
-                </div>
+      return (
+        <div className="max-w-6xl mx-auto p-6 bg-white">
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">NSD 225 Nutrition Study Guide</h1>
+            <p className="text-gray-600">Complete exam outline with comprehensive answers and notes!</p>
+            <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-blue-800 text-sm mb-2">
+                <strong>Exam Format:</strong> Multiple choice, paper exam with bubble sheet. 
+                Know multiplication by 4 & 9, addition to hundreds (no calculator allowed).
+              </p>
+              <div className="flex items-center justify-center space-x-2 text-blue-700">
+                <Calculator className="w-4 h-4" />
+                <span className="text-xs">Fats: 9kcal/g | Carbs: 4kcal/g | Proteins: 4kcal/g</span>
               </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleCompleted(topic);
-                }}
-                className={`p-1 rounded-full transition-colors ${
-                  completedTopics.has(topic) 
-                    ? 'bg-green-500 text-white' 
-                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                }`}
-              >
-                <Check className="w-4 h-4" />
-              </button>
             </div>
-            
-            {expandedSections[topic] && (
-              <div className="border-t border-gray-200 p-4 space-y-6">
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <h4 className="font-medium text-gray-700 flex items-center space-x-2">
-                      <HelpCircle className="w-4 h-4" />
-                      <span>Study Questions:</span>
-                    </h4>
-                    <button
-                      onClick={() => toggleAnswers(topic)}
-                      className="text-blue-600 hover:text-blue-800 text-sm flex items-center space-x-1 transition-colors"
-                    >
-                      <BookOpen className="w-4 h-4" />
-                      <span>{showAnswers[topic] ? 'Hide Answers' : 'Show Answers'}</span>
-                    </button>
-                  </div>
-                  <div className="space-y-4">
-                    {data.questions.map((question, idx) => (
-                      <div key={idx} className="bg-gray-50 rounded-lg p-3">
-                        <p className="font-medium text-gray-800 mb-2">{question}</p>
-                        {showAnswers[topic] && data.answers && data.answers[idx] && (
-                          <div className="mt-3 p-3 bg-blue-50 border-l-4 border-blue-400 rounded">
-                            <div className="text-xs text-blue-600 mb-1 font-medium">✓ Complete Answer:</div>
-                            <p className="text-gray-700 text-sm leading-relaxed">{data.answers[idx]}</p>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div>
-                  <h4 className="font-medium text-gray-700 mb-2 flex items-center space-x-2">
-                    <BookOpen className="w-4 h-4" />
-                    <span>Your Study Materials:</span>
-                  </h4>
-                  <div className="bg-blue-50 rounded-lg p-3">
-                    <div className="text-xs text-blue-600 mb-1">From: Your uploaded notes + Enhanced content</div>
-                    <div className="text-gray-800 whitespace-pre-wrap text-sm leading-relaxed">{data.notes}</div>
-                  </div>
-                </div>
+          </div>
 
-                <div className="mt-4 pt-3 border-t border-gray-200">
-                  <button className="text-blue-600 hover:text-blue-800 text-sm flex items-center space-x-1 transition-colors">
-                    <Plus className="w-4 h-4" />
-                    <span>Add note to this topic</span>
+          {/* Search Bar */}
+          <div className="relative mb-6">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search topics, questions, answers, or notes..."
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          {/* Progress Overview */}
+          <div className="bg-gray-50 rounded-lg p-4 mb-6">
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-medium">Study Progress</span>
+              <span className="text-sm text-gray-600">
+                {completedTopics.size} of {Object.keys(studyTopics).length} topics completed
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div 
+                className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${(completedTopics.size / Object.keys(studyTopics).length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Study Content */}
+          <div className="space-y-4">
+            {filteredTopics.map(([topic, data]) => (
+              <div key={topic} className="border border-gray-200 rounded-lg">
+                <div 
+                  className={`flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 ${
+                    completedTopics.has(topic) ? 'bg-green-50' : ''
+                  }`}
+                  onClick={() => toggleSection(topic)}
+                >
+                  <div className="flex items-center space-x-3">
+                    {expandedSections[topic] ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
+                    <h3 className="font-semibold text-gray-800">{topic}</h3>
+                    <div className="flex space-x-2">
+                      <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                        {data.questions.length} questions
+                      </span>
+                      <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                        answers
+                      </span>
+                      <span className="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">
+                        notes
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleCompleted(topic);
+                    }}
+                    className={`p-1 rounded-full transition-colors ${
+                      completedTopics.has(topic) 
+                        ? 'bg-green-500 text-white' 
+                        : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                    }`}
+                  >
+                    <Check className="w-4 h-4" />
                   </button>
                 </div>
+                
+                {expandedSections[topic] && (
+                  <div className="border-t border-gray-200 p-4 space-y-6">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="font-medium text-gray-700 flex items-center space-x-2">
+                          <HelpCircle className="w-4 h-4" />
+                          <span>Study Questions:</span>
+                        </h4>
+                        <button
+                          onClick={() => toggleAnswers(topic)}
+                          className="text-blue-600 hover:text-blue-800 text-sm flex items-center space-x-1 transition-colors"
+                        >
+                          <BookOpen className="w-4 h-4" />
+                          <span>{showAnswers[topic] ? 'Hide Answers' : 'Show Answers'}</span>
+                        </button>
+                      </div>
+                      <div className="space-y-4">
+                        {data.questions.map((question, idx) => (
+                          <div key={idx} className="bg-gray-50 rounded-lg p-3">
+                            <p className="font-medium text-gray-800 mb-2">{question}</p>
+                            {showAnswers[topic] && data.answers && data.answers[idx] && (
+                              <div className="mt-3 p-3 bg-blue-50 border-l-4 border-blue-400 rounded">
+                                <div className="text-xs text-blue-600 mb-1 font-medium">✓ Complete Answer:</div>
+                                <p className="text-gray-700 text-sm leading-relaxed">{data.answers[idx]}</p>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-medium text-gray-700 mb-2 flex items-center space-x-2">
+                        <BookOpen className="w-4 h-4" />
+                        <span>Your Study Materials:</span>
+                      </h4>
+                      <div className="bg-blue-50 rounded-lg p-3">
+                        <div className="text-xs text-blue-600 mb-1">From: Your uploaded notes + Enhanced content</div>
+                        <div className="text-gray-800 whitespace-pre-wrap text-sm leading-relaxed">{data.notes}</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+            ))}
           </div>
-        ))}
-      </div>
 
-      <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-        <h4 className="font-medium mb-3">Professor's Study Strategy:</h4>
-        <div className="text-sm text-gray-700 space-y-2">
-          <p><strong>Write down all nutrients (micro and macro) and list everything you know:</strong></p>
-          <ul className="list-disc list-inside space-y-1 ml-4">
-            <li>What are they made up of</li>
-            <li>How many forms there are</li>
-            <li>What the differences between them are</li>
-            <li>What foods they come from (animal/plant)</li>
-            <li>How they break down, where in the GI tract they break down</li>
-            <li>What they break down to</li>
-            <li>How they are digested (where, by what)</li>
-            <li>What is absorbed into the cells lining the villi in the small intestine</li>
-            <li>Where they go from there (water vs fat-soluble)</li>
-            <li>How they are used in the body (for energy, building things, as co-enzymes and co-factors, etc.)</li>
-          </ul>
-          <p className="mt-2"><strong>Know key food sources:</strong> calcium in dairy and leafy greens, vitamin C in citrus and peppers</p>
+          <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+            <h4 className="font-medium mb-3">Professor's Study Strategy:</h4>
+            <div className="text-sm text-gray-700 space-y-2">
+              <p><strong>Write down all nutrients (micro and macro) and list everything you know:</strong></p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>What are they made up of</li>
+                <li>How many forms there are</li>
+                <li>What the differences between them are</li>
+                <li>What foods they come from (animal/plant)</li>
+                <li>How they break down, where in the GI tract they break down</li>
+                <li>What they break down to</li>
+                <li>How they are digested (where, by what)</li>
+                <li>What is absorbed into the cells lining the villi in the small intestine</li>
+                <li>Where they go from there (water vs fat-soluble)</li>
+                <li>How they are used in the body (for energy, building things, as co-enzymes and co-factors, etc.)</li>
+              </ul>
+              <p className="mt-2"><strong>Know key food sources:</strong> calcium in dairy and leafy greens, vitamin C in citrus and peppers</p>
+            </div>
+          </div>
+
+          <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <h4 className="font-medium text-yellow-800 mb-2">💡 Study Tip:</h4>
+            <p className="text-yellow-700 text-sm">
+              Use the "Show Answers" button to test yourself! First try to answer each question, then reveal the complete answer to check your understanding. 
+              All answers are research-backed and comprehensive to ensure you're fully prepared for the exam.
+            </p>
+          </div>
         </div>
-      </div>
+      );
+    };
 
-      <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-        <h4 className="font-medium text-yellow-800 mb-2">💡 Study Tip:</h4>
-        <p className="text-yellow-700 text-sm">
-          Use the "Show Answers" button to test yourself! First try to answer each question, then reveal the complete answer to check your understanding. 
-          All answers are research-backed and comprehensive to ensure you're fully prepared for the exam.
-        </p>
-      </div>
-    </div>
-  );
-};
-
-export default EnhancedNutritionStudyGuide;
+    ReactDOM.createRoot(document.getElementById("root")).render(<EnhancedNutritionStudyGuide />);
+  </script>
+</body>
+</html>
